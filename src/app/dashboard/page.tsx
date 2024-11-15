@@ -7,10 +7,10 @@ const DashboardPage = () => {
     const { user, logout, isAuthenticated } = useAuthStore()
     const router = useRouter()
 
-    if (!isAuthenticated) {
-        router.push('/login')
-        return null
-    }
+    // if (!isAuthenticated) {
+    //     router.push('/login')
+    //     return null
+    // }
 
     return (
         <div className="min-h-screen flex flex-col bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white">
