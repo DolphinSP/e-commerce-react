@@ -1,16 +1,25 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import useAuthStore from '@/lib/store/authStore'
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-hot-toast';
+import useAuthStore from '@/lib/store/authStore';
 
 const LoginPage = () => {
-    const { login, error, loading } = useAuthStore()
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const { login, loading } = useAuthStore();
+    const router = useRouter();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const handleLogin = async () => {
-        await login(email, password)
-    }
+        const errorMsg = await login(email, password);
+        if (errorMsg) {
+            toast.error(errorMsg);
+        } else {
+            toast.success('Login successful!');
+            router.push('/dashboard');
+        }
+    };
 
     return (
         <div className="min-h-screen flex flex-col bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white">
@@ -40,11 +49,10 @@ const LoginPage = () => {
                             {loading ? 'Logging in...' : 'Login'}
                         </button>
                     </div>
-                    {error && <p className="text-red-500 mt-4">{error}</p>}
                 </div>
             </main>
         </div>
-    )
-}
+    );
+};
 
-export default LoginPage
+export default LoginPage;

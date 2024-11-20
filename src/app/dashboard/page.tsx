@@ -1,16 +1,15 @@
-'use client'
+'use client';
 
-import { useRouter } from 'next/navigation'
-import useAuthStore from '@/lib/store/authStore'
+import useAuthStore from '@/lib/store/authStore';
+import useRequireAuth from '@/lib/hooks/useRequireAuth';
 
 const DashboardPage = () => {
-    const { user, logout, isAuthenticated } = useAuthStore()
-    const router = useRouter()
+    const isAuthenticated = useRequireAuth();
+    const { user, logout } = useAuthStore();
 
-    // if (!isAuthenticated) {
-    //     router.push('/login')
-    //     return null
-    // }
+    if (!isAuthenticated) {
+        return null; // Optionally, show a loading indicator
+    }
 
     return (
         <div className="min-h-screen flex flex-col bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white">
@@ -27,7 +26,7 @@ const DashboardPage = () => {
                 </div>
             </main>
         </div>
-    )
-}
+    );
+};
 
-export default DashboardPage
+export default DashboardPage;

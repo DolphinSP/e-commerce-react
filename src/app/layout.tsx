@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
+import { Toaster } from 'react-hot-toast'
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,6 +33,7 @@ export default function RootLayout({
       >
       <Header /> {/* Header added here */}
       <main className="flex-grow">{children}</main>
+      <Toaster />
       <footer className="py-4 bg-black bg-opacity-50 backdrop-blur-lg text-center text-sm">
         <p>© {new Date().getFullYear()} ShopEase. Todos los derechos reservados.</p>
       </footer>
